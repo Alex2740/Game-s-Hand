@@ -1,10 +1,16 @@
 <template>
+  <Menu></Menu>
   <h1>About</h1>
 </template>
 
 <script>
-export default {
+import Menu from '../components/Menu.vue'
 
+export default {
+  name: 'About',
+  components: {
+    Menu
+  }
 }
 </script>
 
