@@ -1,7 +1,8 @@
 const architecture = [
     {
         name: 'About',
-        path: '/about'
+        path: '/about',
+        children: []
     }
 ]
 
