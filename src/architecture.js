@@ -1,8 +1,13 @@
 const architecture = [
     {
-        name: 'About',
-        path: '/about',
-        children: []
+        name: 'Pokémon',
+        path: '/pokemon',
+        children: [
+            {
+                name: 'Epée & Bouclier: Expédition Dynamax',
+                path: '/swsh-expedition',
+            }
+        ]
     }
 ]
 
