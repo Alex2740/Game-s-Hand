@@ -1,7 +1,7 @@
 <template>
     <footer class="max-w-screen-md p-3">
         <hr>
-        <div>Copyright © 2021 Apple Inc. Tous droits réservés.</div>
+        <div>Copyright © 2021 Valentin Plantard-Wahl Tous droits réservés.</div>
     </footer>
 </template>
 
