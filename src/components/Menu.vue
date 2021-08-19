@@ -4,13 +4,13 @@
     <div id="menu-background" class="absolute top-0 left-0 z-0 w-full min-h-full bg-gray-800 transition-all duration-500"></div>
     <div class="flex justify-between p-3 mx-auto max-w-screen-md">
       <span id="menu-icon" @click="toggleMenu()" class="material-icons z-10 md:hidden hover:text-white transition-colors">menu</span>
-      <router-link to="/" class="font-semibold z-10 hover:text-white transition-colors"><span class="material-icons">games</span></router-link>
+      <router-link to="/" class="z-10 hover:text-white transition-colors"><span class="material-icons">games</span></router-link>
       <router-link v-for="item in architecture" :key="item.name" :to="item.path" class="z-10 hidden hover:text-white md:inline transition-colors">{{ item.name }}</router-link>
       <span style="width: 1.5rem;"></span>
     </div>
   </div>
   <div id="menu-mobile" class="absolute max-h-0 w-full overflow-hidden border-t border-gray-600 px-10 divide-y divide-gray-600 transition-all duration-500">
-    <router-link v-for="item in architecture" :key="item.name" :to="item.path" class="block py-2 hover:text-white transition-colors">{{ item.name }}</router-link>
+    <router-link v-for="item in architecture" :key="item.name" :to="item.path" class="block py-2 hover:text-white transition-colors" @click="toggleMenu()">{{ item.name }}</router-link>
   </div>
   
 </div>
