@@ -1,34 +1,60 @@
 <template>
-    <h1>Settings</h1>
-    <div>
-        <label for="chimeres">Chimères</label>
-        <input type="checkbox" name="chimeres" id="chimeres" @click="getTypes()">
-    </div>
-    <div>
-        <input type="radio" name="game" id="game-epee" value="epee" checked @click="getTypes()">
-        <label for="game-epee">Epée</label>
-        <input type="radio" name="game" id="game-bouclier" value="bouclier" @click="getTypes()">
-        <label for="game-bouclier">Bouclier</label>
-        <input type="radio" name="game" id="game-all" value="all" @click="getTypes()">
-        <label for="game-all">Les Deux</label>
-    </div>
-    <h1>Types Possiles</h1>
-    <div class="grid grid-cols-8">
-        <img v-for="type in typesAvailable" :key="type" @click="getPokemons(type)" :src="imgType(type)" :alt="type">
-    </div>
-    <h1>Pokémons Possibles</h1>
-    <div class="grid grid-cols-6">
-        <img v-for="pokemon in pokemonsAvailable" :key="pokemon.id" :src="imgPokemon(pokemon.id)" :alt="pokemon.nom" @click="setPokemon(pokemon)">
-    </div>
-    <div class="grid grid-cols-2">
-        <div>
-            <h1>Meilleurs Types Offensifs</h1>
-            <div v-for="type in offensifTypes" :key="type.nom">{{ type.nom }} : {{ roundPrecision(type.value, 2) }}</div>
-        </div>
-        <div>
-            <h1>Meilleurs Types Déffensifs</h1>
-            <div v-for="type in defensifTypes" :key="type.nom">{{ type.nom }} : {{ roundPrecision(type.value, 2) }}</div>
-        </div>
+    <div class="grid grid-cols-12 gap-4 p-4">
+        <Card class="justify-center col-span-9 md:col-span-4 md:order-1 lg:col-span-2 lg:col-start-3">
+            <h1 class="text-xl">Expédition Dynamax</h1>
+        </Card>
+        <Card class="justify-center col-span-3 md:order-3 md:col-span-2 lg:col-span-1 lg:col-start-10">
+            <router-link to="/pokemon" class="flex justify-center">
+                <span class="material-icons align-middle">close</span>
+            </router-link>
+        </Card>
+        <Card class="col-span-full md:order-2 md:col-span-6 lg:col-span-3 lg:col-start-6">
+            <CardTitle>Paramètres</CardTitle>
+            <div class="flex flex-row items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <label for="chimeres">Ultra-Chimères</label>
+                    <input type="checkbox" name="chimeres" id="chimeres" @change="getTypes()">
+                </div>
+                <div class="flex items-center gap-2">
+                    <label from="game">Jeu :</label>
+                    <select name="game" id="game" @change="getTypes()">
+                        <option value="epee">Epée</option>
+                        <option value="bouclier">Bouclier</option>
+                        <option value="all">Les Deux</option>
+                    </select>
+                </div>
+            </div>
+        </Card>
+        <Card class="col-span-full md:order-4">
+            <CardTitle>Types Possibles</CardTitle>
+            <div class="grid grid-cols-8 gap-1 md:grid-cols-12 lg:grid-cols-17">
+                <img v-for="type in typesAvailable" :key="type" @click="getPokemons(type)" :src="imgType(type)" :alt="type">
+            </div>
+        </Card>
+        <Card class="col-span-full  md:col-span-4 md:order-5 lg:col-span-6">
+            <CardTitle>Légendaires Possibles</CardTitle>
+            <div class="grid grid-cols-6 gap-1 md:grid-cols-4 lg:grid-cols-8">
+                <img v-for="pokemon in pokemonsAvailable" :key="pokemon.id" :src="imgPokemon(pokemon.id)" :alt="pokemon.nom" @click="setPokemon(pokemon)">
+            </div>
+        </Card>
+        <Card class="col-span-full  md:col-span-4 md:order-6 lg:col-span-3">
+            <CardTitle class="text-red-500">Meilleurs Types Offensifs</CardTitle>
+            <div class="flex flex-col gap-1">
+                <div class="flex items-start gap-1" v-for="type in offensifTypes" :key="type.nom">
+                    <img class="h-7" :src="imgType(type.nom)" :alt="type.nom">
+                    <div>{{ type.nom }} : {{ roundPrecision(type.value, 2) }}</div>
+                </div>
+            </div>
+        </Card>
+        <Card class="col-span-full  md:col-span-4 md:order-7 lg:col-span-3">
+            <CardTitle class="text-blue-500">Meilleurs Types Défensifs</CardTitle>
+            <div class="flex flex-col gap-1">
+                <div class="flex items-start gap-1" v-for="type in defensifTypes" :key="type.nom">
+                    <img class="h-7" :src="imgType(type.nom)" :alt="type.nom">
+                    <div>{{ type.nom }} : {{ roundPrecision(type.value, 2) }}</div>
+                </div>
+            </div>
+        </Card>
     </div>
 </template>
 
@@ -37,9 +63,15 @@ import legendaires from '../../assets/pokemon/legendaires.js'
 import chimeres from '../../assets/pokemon/chimeres.js'
 import tableTypes from '../../assets/pokemon/table-types.js'
 import { onMounted, ref } from '@vue/runtime-core'
+import Card from '../../components/Card.vue'
+import CardTitle from '../../components/CardTitle.vue'
 
 export default {
     name: "Expédition Dynamax",
+    components: {
+        Card,
+        CardTitle
+    },
     setup() {
         let typesAvailable = ref([])
         let pokemonsAvailable = ref([])
@@ -56,12 +88,7 @@ export default {
         const getTypes = () => {
             typesAvailable.value = []
             const chimeresAvailable = document.getElementById('chimeres').checked
-            let game = ''
-            document.getElementsByName('game').forEach((el) => {
-                if (el.checked) {
-                    game = el.value
-                }
-            })
+            let game = document.getElementById('game').value
 
             legendaires.forEach((pokemon) => {
                 if (pokemon.nom == "Necrozma*" & !chimeresAvailable) {
@@ -104,12 +131,7 @@ export default {
 
             pokemonsAvailable.value = []
             const chimeresAvailable = document.getElementById('chimeres').checked
-            let game = ''
-            document.getElementsByName('game').forEach((el) => {
-                if (el.checked) {
-                    game = el.value
-                }
-            })
+            let game = document.getElementById('game').value
 
             legendaires.forEach((pokemon) => {                
                 if (pokemon.nom == "Necrozma*" & !chimeresAvailable) {
@@ -243,6 +265,9 @@ export default {
 
             offensifTypes.value.sort((a, b) => b.value - a.value)
             defensifTypes.value.sort((a, b) => a.value - b.value)
+
+            //offensifTypes.value = offensifTypes.value.splice(0, 5)
+            //defensifTypes.value = defensifTypes.value.splice(0, 5)
         }
 
         const getWeakness = (pokemon) => {
