@@ -136,11 +136,11 @@ export default {
             document.getElementById('reset-pokemon').setAttribute('type', type)
 
             for (let i = 0; i < children.length; i++) {
-                children[i].classList.remove('active')
+                children[i].classList.remove('border-2')
             }
 
             if (typeIcon != null) {
-                typeIcon.classList.add('active')
+                typeIcon.classList.add('border-2')
             }
 
             pokemonsAvailable.value = []
@@ -370,10 +370,6 @@ export default {
 }
 </script>
 
-<style scopped>
-
-.active {
-    @apply border-2
-}
+<style>
 
 </style>
