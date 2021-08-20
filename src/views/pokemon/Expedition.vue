@@ -26,15 +26,17 @@
             </div>
         </Card>
         <Card class="col-span-full md:order-4">
+            <span class="float-right bg-gray-400 text-white rounded-full material-icons p-1 relative -top-1" @click="getPokemons()">loop</span>
             <CardTitle>Types Possibles</CardTitle>
-            <div class="grid grid-cols-8 gap-1 md:grid-cols-12 lg:grid-cols-17">
-                <img v-for="type in typesAvailable" :key="type" @click="getPokemons(type)" :src="imgType(type)" :alt="type">
+            <div id="types" class="grid grid-cols-8 gap-1 md:grid-cols-12 lg:grid-cols-17">
+                <img :id="type" class="rounded-full border-blue-500" v-for="type in typesAvailable" :key="type" @click="getPokemons(type)" :src="imgType(type)" :alt="type">
             </div>
         </Card>
         <Card class="col-span-full  md:col-span-4 md:order-5 lg:col-span-6">
+            <span id="reset-pokemon" class="float-right bg-gray-400 text-white rounded-full material-icons p-1 relative -top-1" @click="resetPokemons()">loop</span>
             <CardTitle>Légendaires Possibles</CardTitle>
-            <div class="grid grid-cols-6 gap-1 md:grid-cols-4 lg:grid-cols-8">
-                <img v-for="pokemon in pokemonsAvailable" :key="pokemon.id" :src="imgPokemon(pokemon.id)" :alt="pokemon.nom" @click="setPokemon(pokemon)">
+            <div id="legendaires" class="grid grid-cols-6 gap-1 md:grid-cols-4 lg:grid-cols-8">
+                <img :id="pokemon.nom" class="rounded-full border-blue-500" v-for="pokemon in pokemonsAvailable" :key="pokemon.id" :src="imgPokemon(pokemon.id)" :alt="pokemon.nom" @click="setPokemon(pokemon)">
             </div>
         </Card>
         <Card class="col-span-full  md:col-span-4 md:order-6 lg:col-span-3">
@@ -120,14 +122,28 @@ export default {
                 })
             }
 
+            typesAvailable.value.sort()
+
             getPokemons()
         }
 
         const getPokemons = (type) => {
-            pokemonsAvailable.value = []
             if (type == undefined) {
                 type = ''
             }
+            let typeIcon = document.getElementById(type)
+            let children = document.getElementById('types').children
+            document.getElementById('reset-pokemon').setAttribute('type', type)
+
+            for (let i = 0; i < children.length; i++) {
+                children[i].classList.remove('active')
+            }
+
+            if (typeIcon != null) {
+                typeIcon.classList.add('active')
+            }
+
+            pokemonsAvailable.value = []
 
             pokemonsAvailable.value = []
             const chimeresAvailable = document.getElementById('chimeres').checked
@@ -172,6 +188,17 @@ export default {
             }
 
             getResults()
+        }
+
+        const resetPokemons = () => {
+            let type = document.getElementById('reset-pokemon').getAttribute('type')
+
+            if (type == undefined) {
+                getPokemons()
+            }
+            else {
+                getPokemons(type)
+            }
         }
 
         const getResults = () => {
@@ -336,12 +363,17 @@ export default {
             defensifTypes,
             setPokemon,
             imgPokemon,
-            imgType
+            imgType,
+            resetPokemons
         }
     }
 }
 </script>
 
-<style>
+<style scopped>
+
+.active {
+    @apply border-2
+}
 
 </style>
