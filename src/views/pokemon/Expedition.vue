@@ -1,14 +1,14 @@
 <template>
     <div class="grid grid-cols-12 gap-4 p-4">
-        <Card class="flex justify-center items-center col-span-9 md:col-span-4 md:order-1 lg:col-span-2 lg:col-start-3">
+        <Card class="flex justify-center items-center col-span-9 md:col-span-4 md:order-1 lg:col-span-2 lg:col-start-3 p-5">
             <h1 class="text-xl">Expédition Dynamax</h1>
         </Card>
-        <Card class="flex items-center justify-center col-span-3 md:order-3 md:col-span-2 lg:col-span-1 lg:col-start-10">
+        <Card class="flex items-center justify-center col-span-3 md:order-3 md:col-span-2 lg:col-span-1 lg:col-start-10 p-5">
             <router-link to="/pokemon" class="flex justify-center">
                 <span class="material-icons align-middle">close</span>
             </router-link>
         </Card>
-        <Card class="col-span-full md:order-2 md:col-span-6 lg:col-span-3 lg:col-start-6">
+        <Card class="col-span-full md:order-2 md:col-span-6 lg:col-span-3 lg:col-start-6 p-5">
             <CardTitle>Paramètres</CardTitle>
             <div class="flex flex-row items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -25,21 +25,21 @@
                 </div>
             </div>
         </Card>
-        <Card class="col-span-full md:order-4">
+        <Card class="col-span-full md:order-4 p-5">
             <span class="float-right bg-gray-400 text-white rounded-full material-icons p-1 relative -top-1" @click="getPokemons()">loop</span>
             <CardTitle>Types Possibles</CardTitle>
             <div id="types" class="grid grid-cols-8 gap-1 md:grid-cols-12 lg:grid-cols-17">
                 <img :id="type" class="rounded-full border-blue-500" v-for="type in typesAvailable" :key="type" @click="getPokemons(type)" :src="imgType(type)" :alt="type">
             </div>
         </Card>
-        <Card class="col-span-full  md:col-span-4 md:order-5 lg:col-span-6">
+        <Card class="col-span-full  md:col-span-4 md:order-5 lg:col-span-6 p-5">
             <span id="reset-pokemon" class="float-right bg-gray-400 text-white rounded-full material-icons p-1 relative -top-1" @click="resetPokemons()">loop</span>
             <CardTitle>Légendaires Possibles</CardTitle>
             <div id="legendaires" class="grid grid-cols-6 gap-1 md:grid-cols-4 lg:grid-cols-8">
                 <img :id="pokemon.nom" class="rounded-full border-blue-500" v-for="pokemon in pokemonsAvailable" :key="pokemon.id" :src="imgPokemon(pokemon.id)" :alt="pokemon.nom" @click="setPokemon(pokemon)">
             </div>
         </Card>
-        <Card class="col-span-full  md:col-span-4 md:order-6 lg:col-span-3">
+        <Card class="col-span-full  md:col-span-4 md:order-6 lg:col-span-3 p-5">
             <CardTitle class="text-red-500">Meilleurs Types Offensifs</CardTitle>
             <div class="flex flex-col gap-1">
                 <div class="flex items-start gap-1" v-for="type in offensifTypes" :key="type.nom">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </Card>
-        <Card class="col-span-full  md:col-span-4 md:order-7 lg:col-span-3">
+        <Card class="col-span-full  md:col-span-4 md:order-7 lg:col-span-3 p-5">
             <CardTitle class="text-blue-500">Meilleurs Types Défensifs</CardTitle>
             <div class="flex flex-col gap-1">
                 <div class="flex items-start gap-1" v-for="type in defensifTypes" :key="type.nom">

@@ -1,5 +1,5 @@
 <template>
-    <h2 class="text-lg mb-1">
+    <h2 class="mb-3 mx-5 text-lg">
         <slot></slot>
     </h2>
 </template>

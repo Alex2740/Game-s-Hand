@@ -1,12 +1,12 @@
 <template>
-    <div class="bg-white rounded-3xl overflow-hidden">
+    <h2 class="text-3xl">
         <slot></slot>
-    </div>
+    </h2>
 </template>
 
 <script>
 export default {
-    name: 'Card'
+    name: 'SectionTitle'
 }
 </script>
 
