@@ -75,6 +75,7 @@ export default {
         CardTitle
     },
     setup() {
+        document.title = "Expédition Dynamax - Game Tools"
         let typesAvailable = ref([])
         let pokemonsAvailable = ref([])
         let offensifTypes = ref([])

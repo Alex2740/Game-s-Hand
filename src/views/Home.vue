@@ -7,12 +7,16 @@
 <script>
 import Menu from '../components/Menu.vue'
 import Footer from '../components/Footer.vue'
+import { onMounted } from '@vue/runtime-core'
 
 export default {
     name: 'Home',
     components: {
         Menu,
         Footer
+    },
+    setup() {
+        document.title = "Game Tools"
     }
 }
 </script>

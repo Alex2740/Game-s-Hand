@@ -15,6 +15,9 @@ export default {
     components: {
         Menu,
         Footer
+    },
+    setup() {
+        document.title = "Pokémon - Game Tools"
     }
 }
 </script>
