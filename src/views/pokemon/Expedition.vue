@@ -1,9 +1,9 @@
 <template>
     <div class="grid grid-cols-12 gap-4 p-4">
-        <Card class="justify-center col-span-9 md:col-span-4 md:order-1 lg:col-span-2 lg:col-start-3">
+        <Card class="flex justify-center items-center col-span-9 md:col-span-4 md:order-1 lg:col-span-2 lg:col-start-3">
             <h1 class="text-xl">Expédition Dynamax</h1>
         </Card>
-        <Card class="justify-center col-span-3 md:order-3 md:col-span-2 lg:col-span-1 lg:col-start-10">
+        <Card class="flex items-center justify-center col-span-3 md:order-3 md:col-span-2 lg:col-span-1 lg:col-start-10">
             <router-link to="/pokemon" class="flex justify-center">
                 <span class="material-icons align-middle">close</span>
             </router-link>
